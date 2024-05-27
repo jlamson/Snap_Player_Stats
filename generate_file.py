@@ -4,6 +4,9 @@ import assets.data_parser as data_parser
 import assets.file_config as file_config
 from datetime import datetime 
 
+OUTPUT_DIR = "output"
+DATE_FORMAT = "%Y%m%d-%H%M%S"
+
 content = ""
 
 def addPlayerData(template_file):
@@ -52,8 +55,13 @@ def addPlayerData(template_file):
     content = content.replace("{{ cardUnlockHistory }}", str(data_parser.get_CardUnlockHistory()))
 
 def writeTemplateFile():
-    dateString = datetime.now().strftime("%d-%B-%Y-%H%M%S")
-    generatedFileName = f"stats_{dateString}.html"
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
+
+    # ex. stats_20210801-123456.html
+    # This format ensures that the files are sorted by date
+    dateString = datetime.now().strftime(DATE_FORMAT)
+    generatedFileName = f"{OUTPUT_DIR}/stats_{dateString}.html"
 
     with open("assets/template.html", encoding="utf-8-sig") as template_file:
         with open(generatedFileName, "w", encoding="utf-8") as generated_file:
