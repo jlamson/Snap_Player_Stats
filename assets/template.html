@@ -26,6 +26,53 @@
         evt.currentTarget.className += " active";
       }
     </script>
+    <script src="generated_files.js"></script>
+    <script>
+      const updateLink = (linkElement, filename) => {
+        /*
+          Don't update visibility. I had previously hidden links w/ bad links,
+          but it un-centered the date row.Instead, we update the href attribute
+          to the filename if it exists, otherwise the link will just be
+          inavtive.
+        */
+        if (filename) {
+          linkElement.href = filename;
+        }
+      };
+      const setupNavigationLinks = () => {
+        /*
+          This script will setup the previous and next links based on the
+          current file, and the list of files retrieved from generated_files.js.
+          If this file doesn't exist in the list, or if it's the first or last
+          file, the links will be hidden as appropriate.
+        */
+        const currentFilename = window.location.pathname.split("/").pop();
+
+        const previousLink = document.getElementById("previous");
+        const nextLink = document.getElementById("next");
+
+        const currentFileIndex = generatedFiles.indexOf(currentFilename);
+        if (currentFileIndex < 0) {
+          previousLink.style.display = "none";
+          nextLink.style.display = "none";
+          return;
+        } else {
+          previousLink.style.display = "block";
+          nextLink.style.display = "block";
+        }
+
+        const previousFile =
+          currentFileIndex > 0 ? generatedFiles[currentFileIndex - 1] : null;
+        updateLink(previousLink, previousFile);
+
+        const nextFile =
+          currentFileIndex < generatedFiles.length - 1
+            ? generatedFiles[currentFileIndex + 1]
+            : null;
+        updateLink(nextLink, nextFile);
+      };
+      document.addEventListener("DOMContentLoaded", setupNavigationLinks);
+    </script>
     <style>
       @media screen and (max-width: 320px) {
         .center {
@@ -65,8 +112,20 @@
 
       .body {
         background-color: dimgray;
-        background-image: url("assets/images/background.jpg");
+        background-image: url("../assets/images/background.jpg");
         font-size: 1.2vw;
+      }
+
+      /* Flexbox styled w/ date in center, and adjacent prev & next links */
+      .date_row {
+        display: flex;
+        justify-content: space-between;
+        flex-flow: row nowrap;
+        align-items: center;
+        padding-top: 0.6%;
+        padding-bottom: 0.6%;
+        padding-inline-start: 0.6%;
+        padding-inline-end: 0.6%;
       }
 
       /* Style the tab */
@@ -219,10 +278,10 @@
             <h1 center>Conquest</h1>
           </button>
         </div>
-        <div>
-          <h3 class="center" style="margin-top: 0.6%; margin-bottom: 0.6%">
-            Last Update:{{ timeUpdated }}
-          </h3>
+        <div class="date_row">
+          <a id="previous">&lt; Previous</a>
+          <h3>Last Update:{{ timeUpdated }}</h3>
+          <a id="next">Next &gt;</a>
         </div>
       </div>
 

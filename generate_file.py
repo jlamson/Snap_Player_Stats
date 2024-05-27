@@ -1,8 +1,12 @@
+import json
 import os
 import webbrowser
 import assets.data_parser as data_parser
 import assets.file_config as file_config
 from datetime import datetime 
+
+OUTPUT_DIR = "output"
+DATE_FORMAT = "%Y%m%d-%H%M%S"
 
 content = ""
 
@@ -52,8 +56,13 @@ def addPlayerData(template_file):
     content = content.replace("{{ cardUnlockHistory }}", str(data_parser.get_CardUnlockHistory()))
 
 def writeTemplateFile():
-    dateString = datetime.now().strftime("%d-%B-%Y-%H%M%S")
-    generatedFileName = f"stats_{dateString}.html"
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
+
+    # ex. stats_20210801-123456.html
+    # This format ensures that the files are sorted by date
+    dateString = datetime.now().strftime(DATE_FORMAT)
+    generatedFileName = f"{OUTPUT_DIR}/stats_{dateString}.html"
 
     with open("assets/template.html", encoding="utf-8-sig") as template_file:
         with open(generatedFileName, "w", encoding="utf-8") as generated_file:
@@ -68,12 +77,24 @@ def openFileInBrowser(fileName):
     else:
         print(f"File {fileName} generated in the project folder. Open it manually in your browser!")
 
+def updateGeneratedFileList():
+    def isOutputFile(f):
+        return f.startswith("stats_") and f.endswith(".html")
+    generatedFiles = [f for f in os.listdir("output") if (isOutputFile(f))]
+    generatedFiles.sort()
+
+    jsonFileList = json.dumps(generatedFiles, indent = 2)
+    js_content = f"const generatedFiles = {jsonFileList};"
+    with open("output/generated_files.js", "w") as f:
+        f.write(js_content)
+
 def main():
     if file_config.isHelp():
         print(file_config.USAGE)
         exit()
 
     fileName = writeTemplateFile()
+    updateGeneratedFileList()
     openFileInBrowser(fileName)
     
 if __name__ == "__main__":

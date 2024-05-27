@@ -165,4 +165,9 @@ cython_debug/
 
 # Project specific
 **stats**.html
+output/*.js
+output/*.html
 test_data/*.json
+
+# Mac
+.DS_Store
