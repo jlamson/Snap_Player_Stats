@@ -27,9 +27,33 @@
       }
     </script>
     <style>
+      @media screen and (max-width: 320px) {
+        .center {
+          --content-width: 100%;
+        }
+      }
+
+      @media screen and (321px <= width <= 480px) {
+        .center {
+          --content-width: 90%;
+        }
+      }
+
+      @media screen and (481px <= width <= 768px) {
+        .center {
+          --content-width: 80%;
+        }
+      }
+
+      @media screen and (768px < width) {
+        .center {
+          --content-width: 75%;
+        }
+      }
+
       .center {
         margin: auto;
-        width: {{ screenWidthPrct }};
+        width: var(--content-width);
         text-align: center;
       }
 
@@ -359,11 +383,13 @@ Only available for players that have reached Infinite."
         <div class="row row1">
           <div class="column">
             <h1 center>
-              {{ rankedWins }} Wins<br />{{ rankedLosses }} Losses<br />
+              {{ rankedWins }} Wins<br />
+              {{ rankedLosses }} Losses<br />
               {{ rankedTies }} Ties<br />
-              ({{ rankedWinPrct }}% Win Rate)<br />{{ snaps }} Snaps<br />
-              {{ concedes }} Conceded<br />{{ opponentConcedes }} Opponent
-              Conceded
+              ({{ rankedWinPrct }}% Win Rate)<br />
+              {{ snaps }} Snaps<br />
+              {{ concedes }} Conceded<br />
+              {{ opponentConcedes }} Opponent Conceded
             </h1>
           </div>
         </div>

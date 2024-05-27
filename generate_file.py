@@ -5,7 +5,6 @@ import assets.file_config as file_config
 from datetime import datetime 
 
 content = ""
-screenWidthPrct = ''
 
 if file_config.isHelp():
     print(file_config.USAGE)
@@ -55,12 +54,6 @@ def addPlayerData(template_file):
     content = content.replace("{{ cardSplitCounts }}", str(data_parser.get_CardSplitCounts()))
     content = content.replace("{{ variants }}", str(data_parser.get_Variants()))
     content = content.replace("{{ cardUnlockHistory }}", str(data_parser.get_CardUnlockHistory()))
-    content = content.replace("{{ screenWidthPrct }}", screenWidthPrct)
-
-if file_config.isSystemWindows() or file_config.isSystemLinux() or file_config.isSystemMac():
-    screenWidthPrct = '70%'
-elif file_config.isSystemMobile():
-    screenWidthPrct = '95%'
 
 fileNameToCreate = "stats_" + datetime.now().strftime("%d-%B-%Y-%H%M%S") + ".html"
 
