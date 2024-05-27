@@ -5,11 +5,6 @@ import assets.file_config as file_config
 from datetime import datetime 
 
 content = ""
-screenWidthPrct = ''
-
-if file_config.isHelp():
-    print(file_config.USAGE)
-    exit()
 
 def addPlayerData(template_file):
     global content
@@ -55,22 +50,31 @@ def addPlayerData(template_file):
     content = content.replace("{{ cardSplitCounts }}", str(data_parser.get_CardSplitCounts()))
     content = content.replace("{{ variants }}", str(data_parser.get_Variants()))
     content = content.replace("{{ cardUnlockHistory }}", str(data_parser.get_CardUnlockHistory()))
-    content = content.replace("{{ screenWidthPrct }}", screenWidthPrct)
 
-if file_config.isSystemWindows() or file_config.isSystemLinux() or file_config.isSystemMac():
-    screenWidthPrct = '70%'
-elif file_config.isSystemMobile():
-    screenWidthPrct = '95%'
+def writeTemplateFile():
+    dateString = datetime.now().strftime("%d-%B-%Y-%H%M%S")
+    generatedFileName = f"stats_{dateString}.html"
 
-fileNameToCreate = "stats_" + datetime.now().strftime("%d-%B-%Y-%H%M%S") + ".html"
+    with open("assets/template.html", encoding="utf-8-sig") as template_file:
+        with open(generatedFileName, "w", encoding="utf-8") as generated_file:
+            addPlayerData(template_file)
+            generated_file.write(content)
 
-with open("assets/template.html", encoding="utf-8-sig") as template_file:
-    with open(fileNameToCreate, "w", encoding="utf-8") as generated_file:
-        addPlayerData(template_file)
-        
-        generated_file.write(content)
-        
-        if file_config.isSystemWindows() or file_config.isSystemLinux() or file_config.isSystemMac():
-            webbrowser.open_new_tab(f"file://{os.path.abspath(fileNameToCreate)}")
-        if file_config.isSystemMobile():
-            print(f"File stats_date.html generated in the project folder. Open it manually in your browser!")
+    return os.path.abspath(generatedFileName)
+
+def openFileInBrowser(fileName):
+    if file_config.isSystemWindows() or file_config.isSystemLinux() or file_config.isSystemMac():
+        webbrowser.open_new_tab(f"file://{os.path.abspath(fileName)}")
+    else:
+        print(f"File {fileName} generated in the project folder. Open it manually in your browser!")
+
+def main():
+    if file_config.isHelp():
+        print(file_config.USAGE)
+        exit()
+
+    fileName = writeTemplateFile()
+    openFileInBrowser(fileName)
+    
+if __name__ == "__main__":
+    main()        
