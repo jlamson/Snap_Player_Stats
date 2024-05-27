@@ -52,6 +52,7 @@ def addPlayerData(template_file):
     content = content.replace("{{ cardBacksOwned }}", str(data_parser.get_CardBacksOwned()))
     content = content.replace("{{ cardsOwned }}", str(data_parser.get_CardsOwned()))
     content = content.replace("{{ cardSplits }}", str(data_parser.get_CardSplits()))
+    content = content.replace("{{ cardSplitCounts }}", str(data_parser.get_CardSplitCounts()))
     content = content.replace("{{ variants }}", str(data_parser.get_Variants()))
     content = content.replace("{{ cardUnlockHistory }}", str(data_parser.get_CardUnlockHistory()))
     content = content.replace("{{ screenWidthPrct }}", screenWidthPrct)
