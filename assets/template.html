@@ -128,7 +128,7 @@
       h1 {
         color: hsl(263, 97%, 26%);
       }
-      
+
       h2 {
         color: hsl(263, 97%, 26%);
       }
@@ -161,11 +161,15 @@
     </style>
   </head>
   <body class="body">
-    <div class="center" style="padding-top: 2%;">
+    <div class="center" style="padding-top: 2%">
       <div class="tab">
-        <div style="overflow: hidden;">
-          <button class="tablinks center" style="border-left: none;"  onclick="openTab(event, 'Player_Data')"
-          id="defaultOpen">
+        <div style="overflow: hidden">
+          <button
+            class="tablinks center"
+            style="border-left: none"
+            onclick="openTab(event, 'Player_Data')"
+            id="defaultOpen"
+          >
             <h1 center>Account</h1>
           </button>
           <button
@@ -175,17 +179,26 @@
             <h1 center>Collection</h1>
           </button>
           <button class="tablinks center" onclick="openTab(event, 'Ranked')">
-            <h1 center>   Ranked   </h1>
+            <h1 center>Ranked</h1>
           </button>
-          <button class="tablinks center" onclick="openTab(event, 'Card_Stats')">
+          <button
+            class="tablinks center"
+            onclick="openTab(event, 'Card_Stats')"
+          >
             <h1 center>Card Stats</h1>
           </button>
-          <button class="tablinks center" style="border-right: none;" onclick="openTab(event, 'Conquest')">
-            <h1 center>  Conquest  </h1>
+          <button
+            class="tablinks center"
+            style="border-right: none"
+            onclick="openTab(event, 'Conquest')"
+          >
+            <h1 center>Conquest</h1>
           </button>
         </div>
         <div>
-          <h3 class="center" style="margin-top: 0.6%; margin-bottom: 0.6%;">Last Update:{{ timeUpdated }}</h3>
+          <h3 class="center" style="margin-top: 0.6%; margin-bottom: 0.6%">
+            Last Update:{{ timeUpdated }}
+          </h3>
         </div>
       </div>
 
@@ -201,11 +214,18 @@
 
         <div class="row row2">
           <div class="column">
-            <h1 onmouseover="" style="cursor: help;" center title="Seems to be a leaderboard ranking players by who has the most level/cubes in Ranked.
+            <h1
+              onmouseover=""
+              style="cursor: help"
+              center
+              title="Seems to be a leaderboard ranking players by who has the most level/cubes in Ranked.
 Not sure if skill rating is taken into account.
-This is only updated when the game is opened (need to exit and launch game again for an update).">Infinite Ranking</h1>
+This is only updated when the game is opened (need to exit and launch game again for an update)."
+            >
+              Infinite Ranking
+            </h1>
           </div>
-          <div onmouseover="" style="cursor: help;" class="column">
+          <div onmouseover="" style="cursor: help" class="column">
             <h1
               center
               title="Seems to be a leaderboard ranking players by who has the most level/cubes in Ranked.
@@ -219,16 +239,28 @@ This is only updated when the game is opened (need to exit and launch game again
 
         <div class="row row1">
           <div class="column">
-            <h1 onmouseover="" style="cursor: help;" center title="No data on how this is calculated. 
+            <h1
+              onmouseover=""
+              style="cursor: help"
+              center
+              title="No data on how this is calculated. 
 Is somehow related to cubes won/lost in ranked only.
 This is only updated when the game is opened (need to exit and launch game again for an update)
-Only available for players that have reached Infinite.">Snap Points</h1>
+Only available for players that have reached Infinite."
+            >
+              Snap Points
+            </h1>
           </div>
           <div class="column">
-            <h1 onmouseover="" style="cursor: help;" center title="No data on how this is calculated.
+            <h1
+              onmouseover=""
+              style="cursor: help"
+              center
+              title="No data on how this is calculated.
 Is somehow related to cubes won/lost in ranked only.
 This is only updated when the game is opened (need to exit and launch game again for an update)
-Only available for players that have reached Infinite.">
+Only available for players that have reached Infinite."
+            >
               {{ skillRating }}
             </h1>
           </div>
@@ -278,7 +310,9 @@ Only available for players that have reached Infinite.">
       <div id="Ranked" class="tabcontent">
         <div class="row row1">
           <div class="column">
-            <h1 style="margin: 0.03%; margin-top: 0.1%;" center>Current Season</h1>
+            <h1 style="margin: 0.03%; margin-top: 0.1%" center>
+              Current Season
+            </h1>
           </div>
         </div>
         <div class="row row2">
@@ -315,12 +349,14 @@ Only available for players that have reached Infinite.">
             <h1 center>{{ rankedGamesPlayedThisSeason }}</h1>
           </div>
         </div>
-          <div class="row row2">
-            <div class="column">
-              <h1 style="margin: 0.03%; margin-top: 0.1%;" center>Lifetime Stats</h1>
-            </div>
+        <div class="row row2">
+          <div class="column">
+            <h1 style="margin: 0.03%; margin-top: 0.1%" center>
+              Lifetime Stats
+            </h1>
           </div>
-          <div class="row row1">
+        </div>
+        <div class="row row1">
           <div class="column">
             <h1 center>
               {{ rankedWins }} Wins<br />{{ rankedLosses }} Losses<br />
@@ -394,8 +430,13 @@ Only available for players that have reached Infinite.">
       <div id="Card_Stats" class="tabcontent">
         <div class="row row1">
           <div class="column">
-            <h1 style="margin: 0.03%; margin-top: 0.1%;" center>Card Win/Loss Ratio</h1>
-            <h2 style="margin: 0.03%; margin-bottom: 0.1%; padding-bottom: 0.5%;" center>
+            <h1 style="margin: 0.03%; margin-top: 0.1%" center>
+              Card Win/Loss Ratio
+            </h1>
+            <h2
+              style="margin: 0.03%; margin-bottom: 0.1%; padding-bottom: 0.5%"
+              center
+            >
               (when card is drawn/created in hand or played. Ranked data only.)
             </h2>
           </div>
@@ -473,22 +514,18 @@ Only available for players that have reached Infinite.">
         </div>
         <div class="row row2">
           <div class="column">
-            <h1 center centered-element>
-              Split Count By Card
-            </h1>
+            <h1 center centered-element>Split Count By Card</h1>
           </div>
           <div class="column-cards">
-              <h1 style="width: 100%;">{{ cardSplitCounts }}</h1>
+            <h1 style="width: 100%">{{ cardSplitCounts }}</h1>
           </div>
         </div>
         <div class="row row2">
           <div class="column">
-            <h1 center centered-element>
-              Card/Variant Unlock History
-            </h1>
+            <h1 center centered-element>Card/Variant Unlock History</h1>
           </div>
           <div class="column-cards">
-              <h1 style="width: 100%;">{{ cardUnlockHistory }}</h1>
+            <h1 style="width: 100%">{{ cardUnlockHistory }}</h1>
           </div>
         </div>
       </div>
@@ -497,20 +534,42 @@ Only available for players that have reached Infinite.">
         document.getElementById("defaultOpen").click();
       </script>
     </div>
-    <div style="padding-bottom: 2%;"></div>
+    <div style="padding-bottom: 2%"></div>
     <footer class="footer">
-      <h1 style="font-size: larger;">Data is collected only by reading the unencrypted files stored in your hard drive.<br />
-I made this data compiler because I love the game and also love statistics and data interpretation.<br/>
-To report any feedback or contact me please use the Reddit thread where I published this.<br/>
-I ocasionally stream on twitch <a href="http:\\twitch.com\obake25">here</a>.<br/><br/>
-I am currently unemployed and if you would be so kind, I would much appreciate any donation to help support me.<br /></h1>
+      <h1 style="font-size: larger">
+        Data is collected only by reading the unencrypted files stored in your
+        hard drive.<br />
+        I made this data compiler because I love the game and also love
+        statistics and data interpretation.<br />
+        To report any feedback or contact me please use the Reddit thread where
+        I published this.<br />
+        I ocasionally stream on twitch
+        <a href="http:\\twitch.com\obake25">here</a>.<br /><br />
+        I am currently unemployed and if you would be so kind, I would much
+        appreciate any donation to help support me.<br />
+      </h1>
       <form action="https://www.paypal.com/donate" method="post" target="_top">
         <input type="hidden" name="business" value="ZU8D84PDDDJCG" />
         <input type="hidden" name="no_recurring" value="1" />
         <input type="hidden" name="currency_code" value="EUR" />
-        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" width="15%" height="15%"/>
-        <img alt="" border="0" src="https://www.paypal.com/en_PT/i/scr/pixel.gif" width="1" height="1" />
-        </form>
+        <input
+          type="image"
+          src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
+          border="0"
+          name="submit"
+          title="PayPal - The safer, easier way to pay online!"
+          alt="Donate with PayPal button"
+          width="15%"
+          height="15%"
+        />
+        <img
+          alt=""
+          border="0"
+          src="https://www.paypal.com/en_PT/i/scr/pixel.gif"
+          width="1"
+          height="1"
+        />
+      </form>
     </footer>
   </body>
 </html>
