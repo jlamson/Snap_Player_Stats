@@ -361,7 +361,7 @@ def get_CardSplits():
 	return cardSplits
 
 def get_CardSplitCounts():
-	sortedDict = dict(sorted(cardSplitCounts.items(), key=lambda item: item[1]))
+	sortedDict = dict(sorted(cardSplitCounts.items(), key=lambda item: (item[1], item[0])))
 	flattenedList = [f"{cardId}: {splits}" for cardId, splits in sortedDict.items()]
 	return '\n'.join(flattenedList)
 
