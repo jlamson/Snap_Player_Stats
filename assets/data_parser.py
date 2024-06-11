@@ -213,7 +213,7 @@ def reload_file():
 		cardBacksOwned = len(data['ServerState']['CardBacks'])
 
 		global cardUnlockHistory
-		cardUnlockHistory = data['ServerState']['CollectionScoreRewardDefIdsClaimed']['ClaimedCards']
+		cardUnlockHistory = data['ServerState']['CollectionScoreRewardsClaimedHistory']['ClaimedCards']
 
 def get_snapId():
 	return snapId
