@@ -93,14 +93,15 @@ def getFilePath(arg, fileName):
     argPath = getArgFilePath(arg)
     if argPath is not None:
         path = argPath
+    elif isTest() or isSystemMac():
+        # Ensure -t is checked before system
+        path = PATH_TEST + fileName
     elif isSystemWindows():
         path = PATH_WINDOWS + fileName
     elif isSystemLinux():
         path = PATH_LINUX + fileName
     elif isSystemMobile():
         path = PATH_MOBILE + fileName
-    elif isTest() or isSystemMac():
-        path = PATH_TEST + fileName
     else:
         print(f"Unknown system, and no path path defined for {fileName}")
         path = None
