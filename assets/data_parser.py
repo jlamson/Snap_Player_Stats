@@ -196,8 +196,8 @@ def reload_file():
 		global cardBoosterCounts
 		for cardId, cardStats in allCardDefData.items():
 			count = 0
-			if 'BoostersSinceNewCard' in cardStats:
-				count = cardStats['BoostersSinceNewCard']
+			if 'Boosters' in cardStats:
+				count = cardStats['Boosters']
 			if cardId not in cardBoosterCounts:
 				cardBoosterCounts[cardId] = count
 			else:
