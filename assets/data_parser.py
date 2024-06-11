@@ -38,6 +38,7 @@ battlePassesBought = 0
 cardsOwned = 0
 cardSplits = 0
 cardSplitCounts = {}
+cardBoosterCounts = {}
 variants = 0
 avatarsOwned = 0
 titlesOwned = 0
@@ -189,6 +190,18 @@ def reload_file():
 
 		global titlesOwned
 		titlesOwned = len(data['ServerState']['TitleInventory']['OwnedTitles'])
+
+
+		allCardDefData = data['ServerState']['CardDefStats']['Stats']
+		global cardBoosterCounts
+		for cardId, cardStats in allCardDefData.items():
+			count = 0
+			if 'BoostersSinceNewCard' in cardStats:
+				count = cardStats['BoostersSinceNewCard']
+			if cardId not in cardBoosterCounts:
+				cardBoosterCounts[cardId] = count
+			else:
+				cardBoosterCounts[cardId] += count
 
 		global cardsOwned
 		global cardSplits
@@ -362,7 +375,7 @@ def get_CardSplits():
 
 def get_CardSplitCounts():
 	sortedDict = dict(sorted(cardSplitCounts.items(), key=lambda item: (item[1], item[0])))
-	flattenedList = [f"{cardId}: {splits}" for cardId, splits in sortedDict.items()]
+	flattenedList = [f"{cardId} ({cardBoosterCounts[cardId]}b): {splits}" for cardId, splits in sortedDict.items()]
 	return '\n'.join(flattenedList)
 
 def get_Variants():
