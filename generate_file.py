@@ -88,6 +88,9 @@ def updateGeneratedFileList():
     with open("output/generated_files.js", "w") as f:
         f.write(js_content)
 
+    with open("output/index.html", "w") as f:
+        f.write(f'<html><head><meta http-equiv="refresh" content="0; URL=./{generatedFiles[-1]}" /></head></html>')
+
 def main():
     if file_config.isHelp():
         print(file_config.USAGE)
@@ -95,7 +98,7 @@ def main():
 
     fileName = writeTemplateFile()
     updateGeneratedFileList()
-    openFileInBrowser(fileName)
+    openFileInBrowser(os.path.abspath(fileName))
     
 if __name__ == "__main__":
     main()        
