@@ -53,8 +53,6 @@ def addPlayerData(template_file):
     content = content.replace("{{ cardSplits }}", str(data_parser.get_CardSplits()))
     content = content.replace("{{ cardSplitCounts }}", str(data_parser.get_CardSplitCounts()))
     content = content.replace("{{ variants }}", str(data_parser.get_Variants()))
-    content = content.replace("{{ cardUnlockHistory }}", str(data_parser.get_CardUnlockHistory()))
-
 def writeTemplateFile():
     if not os.path.exists(OUTPUT_DIR):
         os.makedirs(OUTPUT_DIR)

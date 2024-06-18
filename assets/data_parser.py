@@ -44,7 +44,6 @@ avatarsOwned = 0
 titlesOwned = 0
 cardBacksOwned = 0
 collectionLvl = 0
-cardUnlockHistory = {}
 
 def reload_file():
 	shopPath = file_config.getShopPath()
@@ -224,9 +223,6 @@ def reload_file():
 
 		global cardBacksOwned
 		cardBacksOwned = len(data['ServerState']['CardBacks'])
-
-		global cardUnlockHistory
-		cardUnlockHistory = data['ServerState']['CollectionScoreRewardsClaimedHistory']['ClaimedCards']
 
 def get_snapId():
 	return snapId
