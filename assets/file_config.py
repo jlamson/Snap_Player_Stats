@@ -12,6 +12,7 @@ ARG_TEST = '-t'
 ARG_COLLECTION = '-c'
 ARG_PROFILE = '-p'
 ARG_SHOP = '-s'
+ARG_UPDATE_TEST_FILES = '-u'
 
 PATH_WINDOWS = '~/AppData/Locallow/Second Dinner/SNAP/Standalone/States/nvprod/'
 PATH_LINUX = '~/.steam/steam/steamapps/compatdata/1997040/pfx/drive_c/users/steamuser/AppData/LocalLow/Second Dinner/SNAP/Standalone/States/nvprod/'
@@ -33,6 +34,7 @@ Arguments:
     {ARG_COLLECTION}: The `{FILE_COLLECTION}` file location
     {ARG_PROFILE}: The `{FILE_PROFILE}` file location
     {ARG_SHOP}: The `{FILE_SHOP}` file location
+    {ARG_UPDATE_TEST_FILES}: Update the test files with the latest data
     
 Defaults:
     If no arguments are provided, the script will search for the files
@@ -55,6 +57,9 @@ def isTest():
 
 def isHelp():
     return ARG_HELP_SHORT in args or ARG_HELP_LONG in args
+
+def isUpdateTestFiles():
+    return ARG_UPDATE_TEST_FILES in args
 
 def getArgFilePath(arg):
     if arg not in args:
@@ -105,8 +110,13 @@ def getFilePath(arg, fileName):
     else:
         print(f"Unknown system, and no path path defined for {fileName}")
         path = None
-    
-    return os.path.expanduser(path)
+    filePath = os.path.expanduser(path)
+
+    if not isTest() and isUpdateTestFiles():
+        with open(filePath, encoding="utf-8-sig") as newDataFile:
+            with open(PATH_TEST + fileName, 'w') as testFile:
+                testFile.write(newDataFile.read())
+    return filePath
 
 def getProfilePath():
     return getFilePath(ARG_PROFILE, FILE_PROFILE)
